@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN ./kotlin build
+RUN chmod +x ./kotlin && ./kotlin build
 
 ENV PORT=8080
 
