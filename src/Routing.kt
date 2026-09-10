@@ -209,7 +209,7 @@ fun Application.configureRouting() {
 
 private suspend fun getFredObservations(seriesId: String): JsonObject {
     val apiKey = System.getenv("FRED_API_KEY")?.trim()
-    if (!apiKey.isNull_or_empty()) {
+    if (!apiKey.isNullOrEmpty()) {
         try {
             val response = httpClient.get("https://api.stlouisfed.org/fred/series/observations") {
                 parameter("series_id", seriesId)
