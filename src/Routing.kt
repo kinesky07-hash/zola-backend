@@ -157,6 +157,7 @@ private fun requiredApiKey(name: String): String =
         ?: when(name) {
             "EXCHANGERATE_API_KEY" -> "ba02926d40a2bfd2142ac474"
             "UNIRATE_API_KEY" -> "nZcBCCNOssyI8wcwspba6un1AjFmtH8nTh5AC36C6dRo6jD3PfyzTnsViC5v9hq1"
+            "FRED_API_KEY" -> "20327a64db6c818379fe7feadf6f68d0"
             else -> ""
         }
 
@@ -208,7 +209,7 @@ fun Application.configureRouting() {
 }
 
 private suspend fun getFredObservations(seriesId: String): JsonObject {
-    val apiKey = System.getenv("FRED_API_KEY")?.trim()
+    val apiKey = requiredApiKey("FRED_API_KEY").takeIf { it.isNotBlank() }
     if (!apiKey.isNullOrEmpty()) {
         try {
             val response = httpClient.get("https://api.stlouisfed.org/fred/series/observations") {
